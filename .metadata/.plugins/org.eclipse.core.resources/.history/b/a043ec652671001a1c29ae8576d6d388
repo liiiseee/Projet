@@ -1,0 +1,91 @@
+package com.intiformation.gestion.servlet;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.intiformation.gestion.dao.ClientDAOImpl;
+import com.intiformation.gestion.dao.ConseillerDAOImpl;
+import com.intiformation.gestion.dao.IClientDAO;
+import com.intiformation.gestion.dao.IConseillerDAO;
+import com.intiformation.gestion.model.Client;
+
+@WebServlet(name = "GestionClientServlet", urlPatterns = {"/gestion-client-servlet"} )
+public class GestionClientServlet extends HttpServlet{
+	
+	// dao du client
+		private IClientDAO clientDAO = new ClientDAOImpl();
+		private IConseillerDAO conseillerDAO = new ConseillerDAOImpl();
+
+/*=======================================méthodes ==============================================*/
+		@Override
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String userAction = request.getParameter("action");
+			switch (userAction) {
+		case "modif":
+
+			// récup l'id du client à modifier à partir de la requete
+			int idClient = Integer.parseInt(request.getParameter("id-client"));
+
+			// récup du client par son id
+			Client client = clientDAO.getClientById(idClient);
+			
+			System.out.println("client get by id servlet ----------- : " + client);
+
+			// redirection vers la page 'modifier-client.jsp' pour afficher
+			// le client à modifier dans un formulaire
+
+			request.setAttribute("client-modif", client);
+
+			request.getRequestDispatcher("/menu-modifier-client.jsp").forward(request, response);
+
+			break;
+			
+		default:
+			break;
+		}
+		
+		}// end doGet
+
+		@Override
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+			String userAction = request.getParameter("action");
+			
+			switch (userAction) {
+			case "gererClient":
+				
+				
+				request.getRequestDispatcher("/menu-client.jsp").forward(request, response);
+				
+				break;
+				
+			case "liste" :
+				
+				List<Client> listeClientsBdd = clientDAO.getAllClients();
+				
+				/* 3.1.2.2 sauvegarde de la liste des client dans la requet ---*/
+				request.setAttribute("liste_clients", listeClientsBdd);
+
+				request.getRequestDispatcher("/liste-clients.jsp").forward(request, response);
+				
+				break;//end afficher
+				
+			case "modif":
+				
+
+			default:
+				break;
+			}// end switch
+			
+			
+		}// end doPost()
+		
+		
+
+}

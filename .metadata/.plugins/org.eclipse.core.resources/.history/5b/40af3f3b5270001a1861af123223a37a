@@ -1,0 +1,17 @@
+package com.intiformation.gestioncomptejdbc.dao;
+
+import java.util.List;
+
+import com.intiformation.gestioncomptejdbc.modele.Compte;
+import com.intiformation.gestioncomptejdbc.modele.CompteCourant;
+
+public interface ICompteDAO<T> extends IGeneraleDAO<Compte>{
+	
+	public List<Compte> getCompteByIDClient(int idClient);
+	
+	public boolean setClient(int id_compte, int idClient);
+	
+	public boolean deposit(Compte compte, double montant);
+
+
+}

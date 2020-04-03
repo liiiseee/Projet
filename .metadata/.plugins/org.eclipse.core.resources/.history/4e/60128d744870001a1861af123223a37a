@@ -1,0 +1,5 @@
+package com.intiformation.gestionclients.model;
+
+public class Compte {
+
+}

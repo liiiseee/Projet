@@ -1,0 +1,5 @@
+package com.intiformation.gestionclients.dao;
+
+public interface ICompteDAO {
+
+}

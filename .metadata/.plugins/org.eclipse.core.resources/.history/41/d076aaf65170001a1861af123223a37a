@@ -1,0 +1,62 @@
+package com.intiformation.gestioncomptejdbc.dao;
+
+import java.sql.Connection;
+import java.util.List;
+
+import com.intiformation.gestioncomptejdbc.tool.ConnexionMySQL_bbd_gestion_compte;
+
+
+public interface IGeneraleDAO<T> {
+	
+	/*____________ Propriétés _____________*/
+	
+	// récup de la connexion à la bdd via l'utilitaire ConnexionMySQL
+	public Connection connection= ConnexionMySQL_bbd_gestion_compte.getInstance();
+	
+	
+	
+	/*_____________ Méthodes ______________*/
+	
+	// Déclaration des méthodes à exposer dans la dao
+	/**
+	 * Recupere la liste des objets
+	 * @return
+	 */
+	public List<T> getAll();
+	
+	/**
+	 * Recupere la liste des identifiants des objets
+	 * @return
+	 */
+	public List<Integer> getAllID();
+	
+	/**
+	 * recuperer 1 objet par son id de la bdd
+	 * @param id
+	 * @return
+	 */
+	public T getByID (int id);
+	/**
+	 * Ajoute un objet t
+	 * @param t
+	 * @return
+	 */
+	public boolean add (T t);
+	
+	/**
+	 * modifie l'objet t
+	 * @param t
+	 * @return
+	 */
+	
+	public boolean update (T t);
+	
+	/**
+	 * Supprime l'objet par son id
+	 * @param id
+	 * @return
+	 */
+	public boolean delete(int id);
+
+}//end interface
+

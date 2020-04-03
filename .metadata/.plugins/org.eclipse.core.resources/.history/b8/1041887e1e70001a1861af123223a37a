@@ -1,0 +1,139 @@
+package com.intiformation.gestionclients.servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.intiformation.gestionclients.dao.ClientDaoImpl;
+import com.intiformation.gestionclients.dao.ConseillerDaoImpl;
+import com.intiformation.gestionclients.dao.IClientDAO;
+import com.intiformation.gestionclients.dao.IConseillerDAO;
+import com.intiformation.gestionclients.model.Client;
+
+/**
+ * controleur (servlet) pour la gestion de l'authentification
+ * cette servlet peut être invoquée via l'url '/authentification-servlet'
+ * @author IN-DF-029
+ *
+ */
+public class AuthentificationServlet extends HttpServlet{
+
+	
+	/**
+	 * traitement de la requête envoyée après la soumission du formulaire de la page authentification.jsp
+	 * Cette requête a pour url : http://localhost:8080/gestion-clients/authentification-servlet
+	 * Cette requête possède 2 paramètres : - p-user = valeur saisie dans le champ email
+	 * 										- p-mdp = valeur saisie dans le champ mot de passe
+	 * 
+	 * @param request : requête envoyée par le formulaire
+	 * @param response : réponse à renvoyer vers de le client
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		/*-----------------------------------------------------------------*/
+		/*-------1. récup des params de la requête-------------------------*/
+		/*-----------------------------------------------------------------*/
+		//--> params de la requ = saisie du formulaire
+		
+		/* 1.1. récup de la valeur du param 'p-user'*/
+		String emailUser = request.getParameter("p-user");
+		
+		/* 1.1. récup de la valeur du param 'p-mdp'*/
+		String mdpUser = request.getParameter("p-mdp");
+		
+		/*-----------------------------------------------------------------*/
+		/*-------2. vérif des valeurs des params de la requête-------------*/
+		/*-----------------------------------------------------------------*/
+		
+		//2.1. vérif que les valeurs soient null
+		
+		if (emailUser==null || mdpUser == null) {
+			
+			/* 2.1.1 redirection vers la page du formulaire authentification.jsp*/
+			//---> redirection = délégation
+			RequestDispatcher rd = request.getRequestDispatcher("/authentification.jsp");
+			//- déclenchement de la délégation
+			rd.forward(request, response);
+			
+		}//end if
+		
+		//2.2. vérif que les valeurs soient vides
+		
+		/* 2.2.1. liste pour stocker les message d'erreurs*/
+		List<String> listeMessageErreurs = new ArrayList<> ();
+		
+		/* 2.2.2. ------------------vérif des valeurs-------------------*/
+		if ("".equals(emailUser)) {
+			
+			//-> ajout d'un message d'erreur dans la liste
+			listeMessageErreurs.add("L'adresse email est obligatoire");
+		}// end if email
+		
+		if ("".equals(mdpUser)) {
+			//-> ajout d'un message d'erreur dans la liste
+			listeMessageErreurs.add("Le mot de passe est invalide");
+		}// end if mdp
+		
+		
+		/* 2.3. ------------------vérif s'il y a des erreurs-------------------*/
+		if (listeMessageErreurs.size() > 0) {
+			
+			/* 2.3.1. sauvegarde de la liste des messages dans la requête comme attribut*/
+			request.setAttribute("messages_erreurs", listeMessageErreurs);
+			
+			/* 2.3.2. délégation de la req/rep vers la page du formulaire authentification.jsp*/
+			request.getRequestDispatcher("/authentification.jsp").forward(request, response);
+			
+		}
+		
+		/*-----------------------------------------------------------------*/
+		/*-------3. authentification du conseiller-------------------------*/
+		/*-----------------------------------------------------------------*/
+		
+		if (listeMessageErreurs.isEmpty()) {
+			
+			//-------------liste vide = pas d'erreurs -----------------------//
+			
+			/*---------------3.1. vérif si le conseiller existe dans la bdd avec mail/mdp--------*/
+			/*3.1.1. définition de la dao (appel de la dao)*/
+			IConseillerDAO conseillerDAO = new ConseillerDaoImpl();
+			
+			/* 3.1.2. vérif de l'existance du conseiller --------------------------*/
+			if (conseillerDAO.isConseillerExists(emailUser, mdpUser)) {
+				
+				//-----------------le conseiller existe dans la bdd-----------------//
+				/* 3.1.2.1. récup de la liste des clients --------------------------*/
+				IClientDAO clientDAO = new ClientDaoImpl();
+				
+				List<Client> listeClientsBdd = clientDAO.getAllClients();
+				
+				/*3.1.2.2. sauvegarde de la liste des clients dans la requête*/
+				request.setAttribute("liste_clients", listeClientsBdd);
+				
+				/* 3.1.2.3. redirection vers la page d'accueil--------------------------*/
+				request.getRequestDispatcher("/accueil.jsp").forward(request, response);
+				
+				
+			}else {
+				
+				//-----------------le conseiller n'existe pas dans la bdd-----------------//
+				/* 3.1.2.1bis. redirection vers la page authentification.jsp --------------------------*/
+				listeMessageErreurs.add("Identité non valide");
+				request.setAttribute("messages_erreurs", listeMessageErreurs);
+				
+				request.getRequestDispatcher("/authentification.jsp").forward(request, response);
+				
+			}//end else
+			
+		}// end if is empty
+	}//end doPost()
+	
+
+}

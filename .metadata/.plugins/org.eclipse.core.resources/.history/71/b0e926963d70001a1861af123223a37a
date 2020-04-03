@@ -1,0 +1,120 @@
+package com.intiformation.gestionclients.servlet;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.intiformation.gestionclients.dao.ClientDaoImpl;
+import com.intiformation.gestionclients.dao.IClientDAO;
+import com.intiformation.gestionclients.model.Client;
+
+/**
+ * servlet pour gestion du client
+ * @author IN-DF-029
+ *
+ */
+@WebServlet(name="GestionClientServlet", urlPatterns = {"/gestion-client-servlet"})
+public class GestionClientServlet extends HttpServlet{
+	
+	// dao du client
+		private	IClientDAO clientDAO = new ClientDaoImpl();
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		/**
+		 * Traitement des requêtes :
+		 *  1. modification => url : http://localhost:8080/gestion-clients/gestion-client-servlet?action=modif&id-client=1
+		 */
+		
+		
+		// 1. récup de la valeur du param action
+		String userAction = request.getParameter("action");
+		
+		// 2. tes de la valeur
+		switch (userAction) {
+		
+		// tratiement de la requ venant de accueil. jsp (lien modifier)
+		case "modif":
+			// récup de l'id du client ) modifier à patir de la requête
+			int idClient = Integer.parseInt(request.getParameter("id-client"));
+			
+			// récup client par id
+			Client client = clientDAO.getClientById(idClient);
+			
+			// redirection vers 'modifier-client.jsp' pour afficher le client à modif
+			request.setAttribute("client-modif", client);
+			
+			request.getRequestDispatcher("/modifier-client.jsp").forward(request, response);
+			
+			
+			
+			
+			break;
+			
+		
+		
+
+		default:
+			break;
+		}
+		
+		
+	}// end doGet()
+	
+	
+	/*==============================================*/
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 1. récup de la valeur du param 'action'
+		String userAction = request.getParameter("action");
+		
+		
+		
+		// 2. vérif de la valeur du param action
+		switch (userAction) {
+		case "ajout": // si action = ajout
+			// récup des paramètres de la requête (saisie du formulaire)
+			String nom = request.getParameter("pNom");
+			String prenom = request.getParameter("pPrenom");
+			String adresse = request.getParameter("pAdresse");
+			String ville = request.getParameter("pVille");
+			String codePostal = request.getParameter("pCodePostal");
+			String telephone = request.getParameter("pTelephone");
+			
+			// chargement des données dans un objet client
+			Client client = new Client(nom, prenom, adresse, codePostal, ville, telephone);
+			
+			// appel de la dao pour ajouter le client dans la bdd
+			clientDAO.ajouterClient(client);
+			
+			// redirection vers la page 'accueil.jsp' + sauvegarde de la nouvelle liste de clients dans la requête
+			List<Client> listeClients = clientDAO.getAllClients();
+			
+			request.setAttribute("liste_clients", listeClients);
+			
+			request.getRequestDispatcher("/accueil.jsp").forward(request, response);
+			
+			
+			break;
+			
+case "modification" :
+			
+			break;
+
+		default:
+			break;
+		}// end switch
+		
+	}// end doPost()
+	
+	
+
+}
