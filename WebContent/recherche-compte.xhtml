@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"> 
+
+<h:head><title>rechercher un compte</title>
+	<h:outputStylesheet library="styles" name="bootstrap.min.css" ></h:outputStylesheet>
+	<h:outputStylesheet library="styles" name="styleModif.css" ></h:outputStylesheet>
+	
+	<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+</h:head> 
+<body class="bg-light">
+
+<h:form>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Gestion des comptes</a>
+  <h:inputText class="form-control form-control-dark w-100" placeholder="Search" aria-label="Search"/>
+  
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+    <h:commandLink class="nav-link"  action="#{authenticationBean.deconnecterUtilisateur()}" value="Se déconnecter" />
+
+    </li>
+  </ul>
+  
+</nav>
+
+<div class="container-fluid" >
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar" >
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Liste des comptes 
+            </a>
+          </li>
+          <li class="nav-item">
+          <h:commandLink class="nav-link" actionListener="#{gestionCompte.initialiserCompte}" action="ajoutCompte" value="Ajouter un compte"> <span data-feather="file"></span> </h:commandLink>
+          <!--  <h:commandLink class="nav-link"  action="ajoutCompte" value="Ajouter un compte"> <span data-feather="file"></span> </h:commandLink> -->
+            
+          </li>
+          <li class="nav-item">
+          	<h:commandLink class="nav-link"  action="attribCompte" value="Attribuer un compte à un client"> <span data-feather="file"></span> </h:commandLink>
+           
+          </li>
+         <li class="nav-item">
+         	<h:commandLink class="nav-link"  action="cherCompte" value="Chercher un compte"> <span data-feather="file"></span> </h:commandLink>
+          </li>
+          
+          <li class="nav-item">
+          	<h:commandLink class="nav-link"  action="menuCompte" value="Retour au menu des comptes"> </h:commandLink>
+          </li>
+
+          <li class="nav-item">
+          	<h:commandLink class="nav-link"  action="menuPrinc" value="Retour au menu principal"> </h:commandLink>
+          </li>
+          </ul>
+          
+
+       
+      </div>
+    </nav>
+    </div>
+    </div>
+</h:form>
+
+<div class="container">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+	<h:graphicImage library="images" name="banque.jpg" class="d-block mx-auto mb-4" width="80" height="80" />
+    <h2>Rechercher un compte</h2>
+   
+  </div>
+
+	
+	 
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Données du comptes</h4>
+      <h:form class="needs-validation" novalidate="true" >
+      
+      <div class="form-row">
+			    <div class="col-md-4 mb-3">
+			      <h:outputLabel value="Identifiant" for="validationDefault01"/>
+			      <h:inputText value="#{gestionCompte.compte.idCompte}" id="validationDefault01" class="form-control">
+			      	<f:param id="cherchCompte" name="id" value="#{gestionCompte.compte.idCompte}"/>
+			      </h:inputText>
+			    </div>
+			    
+	    		
+			  </div>
+			  
+			  <hr class="mb-4"> 
+			  
+		
+      
+        <h:commandButton action="listCompte" actionListener="#{gestionCompte.compte.}"  value="Rechercher" class="btn btn-primary btn-lg btn-block"/>
+        </hr>
+        
+	
+		
+     
+
+
+
+
+     
+
+      
+
+        
+        
+
+     
+       
+        
+          
+      </h:form>
+    </div>
+
+
+
+</div>
+
+</body> 
+</html>

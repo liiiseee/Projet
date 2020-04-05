@@ -167,7 +167,7 @@ public class Compte implements Serializable{
 	public double getConseillerId() {
 		return conseillerId;
 	}
-	public void setConseillerId(int conseillerId) {
+	public void setConseillerId(double conseillerId) {
 		this.conseillerId = conseillerId;
 	}
 	/*_____________ Méthodes ______________*/

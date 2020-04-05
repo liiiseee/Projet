@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"> 
+
+<h:head>
+	<title>Menu des comptes</title>
+	<h:outputStylesheet library="styles" name="bootstrap.min.css" ></h:outputStylesheet>
+	
+	<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    
+<h:outputStylesheet library="styles" name="dashboard.css" ></h:outputStylesheet>
+
+	
+</h:head> 
+<body> 
+<ui:composition>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Gestion des comptes</a>
+  <h:inputText class="form-control form-control-dark w-100" value="" placeholder="Search" aria-label="Search"/>
+  <h:form>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+    <h:commandLink class="nav-link"  action="#{authenticationBean.deconnecterUtilisateur()}" value="Se déconnecter" />
+
+    </li>
+  </ul>
+  </h:form>
+</nav>
+
+<div class="container-fluid" >
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar" >
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Liste des comptes <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+          <h:commandLink class="nav-link"  action="ajoutCompte" value="Ajouter un compte"> <span data-feather="file"></span> </h:commandLink>
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="attribuer-compte.jsp">
+              <span data-feather="file"></span>
+              Attribuer un compte à un client
+            </a>
+          </li>
+         <li class="nav-item">
+            <a class="nav-link" href="recherche-compte.jsp">
+              <span data-feather="shopping-cart"></span>
+              Chercher un compte
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="menu.jsp">
+              <span data-feather="bar-chart-2"></span>
+              Retour au menu principal
+            </a>
+          </li>
+          </ul>
+          
+
+       
+      </div>
+    </nav>
+    </div>
+    </div>
+
+</ui:composition>
+
+</body> 
+</html>

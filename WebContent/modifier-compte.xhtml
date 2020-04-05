@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+<title>Formulaire de modification</title>
+	<h:outputStylesheet library="styles" name="bootstrap.min.css" ></h:outputStylesheet>
+	<h:outputStylesheet library="styles" name="styleModif.css" ></h:outputStylesheet>
+	
+	<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+</h:head> 
+<body class="bg-light">
+
+<h:form>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Gestion des comptes</a>
+  <h:inputText class="form-control form-control-dark w-100" placeholder="Search" aria-label="Search"/>
+  
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+    <h:commandLink class="nav-link"  action="#{authenticationBean.deconnecterUtilisateur()}" value="Se déconnecter" />
+
+    </li>
+  </ul>
+  
+</nav>
+
+<div class="container-fluid" >
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar" >
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Liste des comptes 
+            </a>
+          </li>
+          <li class="nav-item">
+          <h:commandLink class="nav-link" actionListener="#{gestionCompte.initialiserCompte}" action="ajoutCompte" value="Ajouter un compte"> <span data-feather="file"></span> </h:commandLink>
+          <!--  <h:commandLink class="nav-link"  action="ajoutCompte" value="Ajouter un compte"> <span data-feather="file"></span> </h:commandLink> -->
+            
+          </li>
+          <li class="nav-item">
+          	<h:commandLink class="nav-link"  action="attribCompte" value="Attribuer un compte à un client"> <span data-feather="file"></span> </h:commandLink>
+           
+          </li>
+         <li class="nav-item">
+         	<h:commandLink class="nav-link"  action="cherCompte" value="Chercher un compte"> <span data-feather="file"></span> </h:commandLink>
+          </li>
+          
+          <li class="nav-item">
+          	<h:commandLink class="nav-link"  action="menuCompte" value="Retour au menu des comptes"> </h:commandLink>
+          </li>
+
+          <li class="nav-item">
+          	<h:commandLink class="nav-link"  action="menuPrinc" value="Retour au menu principal"> </h:commandLink>
+          </li>
+          </ul>
+          
+
+       
+      </div>
+    </nav>
+    </div>
+    </div>
+</h:form>
+
+<div class="container">
+<div class="py-5 text-center">
+	<h:graphicImage library="images" name="banque.jpg" class="d-block mx-auto mb-4" width="80" height="80" />
+    <h2>Modifier le compte</h2>
+   
+  </div>
+
+	
+	 
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Données du comptes</h4>
+      <h:form class="needs-validation" novalidate="true" >
+        <div class="row">
+     
+           <div class="col-md-6 mb-3">
+          <h:outputLabel value="Solde" for="idSolde"  />
+            <h:inputText id="idSolde" value="#{gestionCompte.compte.solde}" class = "form-control"  required="true" />
+            <div class="invalid-feedback">
+             Solde
+            </div>
+          </div>
+          
+          <div class="col-md-6 mb-3">
+          	<h:outputLabel value="Identifiant du conseiller" for="idConseiller"  />
+            <h:inputText value="#{gestionCompte.compte.conseillerId}" class = "form-control" id="idConseiller" required="true" />
+            </div> 
+          
+       
+        </div>
+
+
+
+
+     
+
+      
+
+        <div class="row">
+     
+          <div class="col-md-4 mb-3">
+          	<h:outputLabel value="Type de compte" for="state"/>
+            <h:inputText value="#{gestionCompte.compte.typeCompte}"  required="true" id="state"/>
+            <select class="custom-select d-block w-100" id="state" required = "true">
+              <option value="">Choisissez...</option>
+              <option>epargne</option>
+              <option>courant</option>
+            </select>
+            <div class="invalid-feedback">
+               Veuillez renseigner le type de compte
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+          	<h:outputLabel value="Taux" for="zip" />
+          	<h:inputText value="#{gestionCompte.compte.taux}" class="form-control" id="zip"/>
+       
+          </div>
+          <div class="col-md-3 mb-3">
+          
+          	<h:outputLabel value="Découvert" for="idDec" />
+          	<h:inputText value="#{gestionCompte.compte.decouvert}" class="form-control" id="idDec"/>
+           
+          </div>
+          
+          <div class="col-md-3 mb-3">
+          
+          	<h:outputLabel value="Id client" for="idClient" />	
+          	<h:outputText value="#{gestionCompte.compte.clientID}" id="idClient" class="form-control"/>
+           
+          </div>
+          
+          
+   
+       
+        </div>
+        
+
+     
+       
+        
+         <hr class="mb-4"> 
+      
+        <h:commandButton action="listCompte" actionListener="#{gestionCompte.modifierCompte}" value="Modifier" class="btn btn-primary btn-lg btn-block"/>
+        </hr> 
+      </h:form>
+    </div>
+
+
+
+</div>
+
+</body> 
+</html>
