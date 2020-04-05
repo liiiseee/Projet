@@ -1,0 +1,8 @@
+package com.intiformation.gestion.dao;
+
+import com.intiformation.gestion.model.Conseiller;
+
+public interface IConseillerDAO extends ICompteDAO<Conseiller>{
+
+	
+}

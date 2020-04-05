@@ -1,0 +1,82 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>page d'accueil</title>
+</head>
+<body>
+
+		<%-- ================================================================================= --%>
+		<%-- =====================affichage du bouton 'se déconnecter'======================== --%>
+		<%-- ================================================================================= --%>
+		<div style="float: right;">
+		
+			<!-- on vérifie la présence de l'attribut de session 'isLogged' dans la session -->
+			<c:if test="${not empty isLogged}">
+					<%-- le conseiller est déjà connecté => affichage du bouton se déconnecter --%>
+					
+					<%--
+						> au click sur le lien se déconnecter :
+								-> envoi d'une requête http en GET
+										-url de la requête : http://localhost:8080/gestion-clients/authentification-servlet?destroy=true
+										
+								-> cette requête part vers la servlet
+					 --%>
+					<a href="authentification-servlet?destroy=true">Se Déconnecter</a>
+					
+			</c:if>
+		
+		</div>
+		
+
+		<%-- ================================================================================= --%>
+		<%-- =====================affichage de la liste des clients=========================== --%>
+		<%-- ================================================================================= --%>
+		<%--
+				> récup de la liste des clients sauvegardée dans la requête avant délégation vers la page d'accueil
+					(ref : dans la servlet étape 3.1.2.2)
+					-> request.setAttribute("liste_clients", listeClientsBdd);
+		 --%>
+		 
+		 <table border="1" width="60%">
+		 	<!-- en tête de la table -->
+		 	<thead style="background-color: lightgray;">
+		 	<tr>
+		 		<th> ID</th>
+		 		<th> Nom</th>
+		 		<th> Prénom</th>
+		 		<th> Adresse</th>
+		 		<th> Ville</th>
+		 		<th> Code Postal</th>
+		 		<th> téléphone</th>
+		 	
+		 	
+		 	</tr>
+		 
+		 	</thead>
+		 	
+		 	<!-- body de la table (données des clients) -->
+		 	<tbody>
+		 			<c:forEach items="${liste_clients }" var="client">
+		 				<tr>
+		 				<td> <c:out value="${client.idClient}" /> </td>
+		 				<td>${client.nom}</td>
+		 				<td>${client.prenom}</td>
+		 				<td>${client.adresse}</td>
+		 				<td>${client.ville}</td>
+		 				<td>${client.codePostal}</td>
+		 				<td>${client.telephone}</td>
+		 				
+		 				</tr>
+		 			
+		 			</c:forEach>
+		 	
+		 	</tbody>
+		 
+		 </table>
+		
+</body>
+</html>

@@ -1,0 +1,278 @@
+package com.intiformation.gestionclients.servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.intiformation.gestionclients.dao.ClientDaoImpl;
+import com.intiformation.gestionclients.dao.ConseillerDaoImpl;
+import com.intiformation.gestionclients.dao.IClientDAO;
+import com.intiformation.gestionclients.dao.IConseillerDAO;
+import com.intiformation.gestionclients.model.Client;
+
+/**
+ * controleur (servlet) pour la gestion de l'authentification <br/>
+ * cette servlet peut être invoquée via l'url '/authentication-servlet'
+ * @author INTIFORMATION
+ *
+ */
+public class AuthentificationServlet extends HttpServlet{
+	
+	/**
+	 * <pre>
+	 * 			Gestion de la session dans les jsp/servlet 
+	 * 			------------------------------------------
+	 * 
+	 * 		> défintion d'une session : 
+	 * 					- c'est pouvoir en tant que développeur associer 
+	 *                    des données à un utilisateur du site 
+	 *                    
+	 *                  - Une session est un objet associé à un utilisateur ou visiteur du site 
+	 *                  
+	 *                  - On peut mettre dans la session des données et les récupérer après. 
+	 *                  
+	 *      > technique : - Une session est un objet de type de la classe HttpSession 
+	 *      
+	 *      			  - l'objet HttpSession permet de créer une session pour un utilisateur 
+	 *      
+	 *       						-> création de la session = création de l'id de session au niveau du serveur
+	 *       
+	 *        			  - on peut sauveagrder dans l'objet HttpSession des données 
+	 *                      et les récupérer après 
+	 *                      
+	 *     > process session 
+	 *     						1. faire connecter l'utilisateur => création d'un id de session via HttpSession
+	 *     
+	 *     						2. faire déconnecter l'utilisateur => destruction de la session 
+	 *                                                              => destruction de l'id de session    
+	 * </pre>
+	 */
+	
+	
+	/**
+	 * traitement de la requête envoyée au click du lien 'Se Déconnecter' 
+	 * de la page 'accueil.jsp'. <br/>
+	 * c'est une requete http GET avec l'url : 
+	 * 			http://localhost:8080/gestion-clients/authentication-servlet?destroy=true
+	 * 
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, 
+			             HttpServletResponse response) throws ServletException, IOException {
+		
+		/*==========================================================================*/
+		/*======= DECONNEXION DU CONSEILLER  =======================================*/
+		/*==========================================================================*/
+		/**
+		 * déconnexion = destruction de la sesion (id de session) => destruction de l'objet HttpSession 
+		 *               via la méthode invalidate()
+		 */
+		
+		/* 1. récup de la session associée à la requete (associée au conseiller)*/
+		/**
+		 * > getSession() : récup de la session.
+		 * > false :  au serveur = si la session n'existe pas, ne la crée pas 
+		 */
+		HttpSession session =  request.getSession(false); 
+		
+		/* 2. récup du param de la requête 'destroy'*/
+		String destroySession = request.getParameter("destroy");
+		
+		/* 3. déconnexion du conseiller */
+		if ("true".equals(destroySession)) {
+			//--> déconnexion 
+			session.invalidate();
+		}
+		
+		/* 4. redirection vers la page du formulaire 'autnentification.jsp'*/
+		request.getRequestDispatcher("/authentification.jsp").forward(request, response);
+		
+		
+	}//end doGet()
+
+	
+	
+	
+	
+	
+	/**
+	 * traitement de la requête envoyée après la 
+	 * soumission du formulaire de la page 'authentification.jsp'.<br/>
+	 * -> cette requête à comme url : http://localhost:8080/gestion-clients/authentication-servlet
+	 * -> cette requête possède 2 paramètres : - p-user = valeur sasie dans le champ email
+	 *                                         - p-mdp = valeur sasie dans le champ mot de passe
+	 *                                         
+	 * @param request : la requête envoyée du formulaire
+	 * @param response : la réponse à renvoyer vers le client (navigateur) 
+	 * 
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		/*==========================================================================*/
+		/*======= GESTION DE LA SESSION UTILISATEUR ================================*/
+		/*==========================================================================*/
+		
+		/* 1. récup de la session associée au conseiller ===========================*/
+		/**
+		 *  > getSession() : récup de la session associée à la requete 
+		 *  		-> true : si la session n'existe pas, on demande au serveur de la créer 
+		 */
+		 HttpSession session = request.getSession(true);
+		 
+		 /* 2. vérif si le conseiller est connecté ===================================*/
+		 /**
+		  * la vérif se fait via l'attribut de session 'isLogged' définie 
+		  * lors de l'authentificaton du conseiller 
+		  */
+		 if (session.getAttribute("isLogged") != null) {
+			
+			 // redirection vers la page du formulaire 'authentification.jsp'
+			 request.getRequestDispatcher("/authentification.jsp").forward(request, response);
+			 
+		}//end if 
+		
+		
+		/*==========================================================================*/
+		
+		
+		
+		/*-----------------------------------------------------------------*/
+		/*---- 1. récup des paramètres de la requête ----------------------*/
+		/*-----------------------------------------------------------------*/
+		//--> params de la requete = la saisie du formulaire 
+		
+		/* 1.1. récup de la valeur du paramètre 'p-user' (l'email saisie dans le formulaire) */
+		String emailUser = request.getParameter("p-user");
+		
+		/* 1.2. récup de la valeur du paramètre 'p-mdp' (le mot de passe sasie dans le formulaire) */
+		String mdpUser = request.getParameter("p-mdp");
+		
+		
+		/*-----------------------------------------------------------------*/
+		/*---- 2. vérif des valeurs  des paramètres de la requête ---------*/
+		/*-----------------------------------------------------------------*/
+		
+		/* 2.1. vérif si les valeurs sont null ----------------------------*/
+		
+		if (emailUser == null || mdpUser == null) {
+			
+			/* 2.1.1. redirection vers la page du formulaire 'authentification.jsp' */
+			//--> redirection = délégation 
+			RequestDispatcher rd = request.getRequestDispatcher("/authentification.jsp");
+			//- déclenchement de la délégation 
+			rd.forward(request, response);
+			
+		}//end if 
+		
+		/* 2.2. vérif si les valeurs sont vide -----------------------------*/
+		
+		/* 2.2.1. liste pour stocker les messages d'erreurs ----------------*/
+		List<String> listeMessagesErreurs = new ArrayList<>();
+		
+		/* 2.2.2. vérif des valeurs  ---------------------------------------*/
+		
+		if ("".equals(emailUser)) {
+			
+			//-> ajout d'un message d'erreur dans la liste 
+			listeMessagesErreurs.add("Le mail est obligatoire");
+			
+		}//end if 
+		
+		if ("".equals(mdpUser)) {
+			
+			//-> ajout d'un message d'erreur dans la liste 
+			listeMessagesErreurs.add("Le mot de passe est obligatoire");
+			
+		}//end if 
+		
+		/* 2.3. vérif s'il y a des erreurs  -----------------------------*/
+		if (listeMessagesErreurs.size() > 0) {
+			
+			/* 2.3.1. sauvegarde de la liste des messages dans la requête comme attribut*/
+			request.setAttribute("messages_erreurs", listeMessagesErreurs);
+			
+			/* 2.3.2. délégation de la requete/reponse à la page 'authentification.jsp' */
+			//--> redirection vers la page 'authentification.jsp'
+			request.getRequestDispatcher("/authentification.jsp").forward(request, response);
+			
+		}//end if 
+		
+		
+		/*-----------------------------------------------------------------*/
+		/*---- 3. authentification du conseiller --------------------------*/
+		/*-----------------------------------------------------------------*/
+		if (listeMessagesErreurs.isEmpty()) {
+			
+			//------------  liste vide = pas d'erreurs ---------------//
+			
+			/* 3.1. vérif si le conseiller existe dans la bdd avec mail/mdp */
+			
+			/* 3.1.1. définition de la dao (appel de la dao ) ---------------*/
+			IConseillerDAO conseillerDAO = new ConseillerDaoImpl();
+			
+			/* 3.1.2. vérif de l'existance du conseiller ---------------------*/
+			if (conseillerDAO.isConseillerExists(emailUser, mdpUser)) {
+				
+				//------- le conseiller existe dans la bdd ----------//
+				
+				/*==========================================================================*/
+				/*===== CONNEXION DU CONSEILLER ============================================*/
+				/*==========================================================================*/
+				/**
+				 * > on va faire connecter le conseiller à son espace personnel 
+				 * 		-> création de la session => création d'un id de session
+				 * 
+				 * 				HttpSession session = request.getSession(true);
+				 */
+				 /* définition d'un attribut de session 'isLogged' */
+				session.setAttribute("isLogged", "true");
+				
+				/*==========================================================================*/
+				
+				/* 3.1.2.1 récup de la liste des clients  ---------------------*/
+				IClientDAO clientDAO = new ClientDaoImpl();
+				List<Client> listeClientsBdd = clientDAO.getAllClients();
+				
+				/* 3.1.2.2 sauvegarde de la liste des client dans la requet ---*/
+				request.setAttribute("liste_clients", listeClientsBdd);
+				
+				/* 3.1.2.3 délégation (redirection) vers la page d'accueil ----*/
+				request.getRequestDispatcher("/accueil.jsp").forward(request, response);
+					
+			}else {
+				
+				//----- le conseiller n'existe pas dans la bdd -------//
+				
+				/* 3.1.2.1bis redirection vers 'authentification.jsp' ---------------------*/
+				listeMessagesErreurs.add("Identité non valide");
+				request.setAttribute("messages_erreurs", listeMessagesErreurs);
+				
+				request.getRequestDispatcher("/authentification.jsp").forward(request, response);
+				
+				
+			}//end else 
+			
+			
+		}//end if liste isEmpty()
+		
+		
+	}//end doPost()
+
+	
+	
+}//end class 
+
+
+
+
+
+

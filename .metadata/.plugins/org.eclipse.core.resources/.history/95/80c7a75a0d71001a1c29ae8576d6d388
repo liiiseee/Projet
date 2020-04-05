@@ -1,0 +1,48 @@
+package com.intiformation.gestion.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.intiformation.gestion.dao.ClientDAOImpl;
+import com.intiformation.gestion.dao.IClientDAO;
+
+@WebServlet(name = "GestionClientServlet", urlPatterns = {"/gestion-client-servlet"} )
+public class GestionClientServlet extends HttpServlet{
+	
+	// dao du client
+		private IClientDAO clientDAO = new ClientDAOImpl();
+
+/*=======================================méthodes ==============================================*/
+		@Override
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		}// end doGet
+
+		@Override
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+			String userAction = request.getParameter("action");
+			
+			switch (userAction) {
+			case "gererClient":
+				
+				
+				request.getRequestDispatcher("/menu-client.jsp").forward(request, response);
+				
+				break;
+
+			default:
+				break;
+			}// end switch
+			
+			
+		}// end doPost()
+		
+		
+
+}

@@ -1,0 +1,62 @@
+package com.intiformation.gestionclients.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * controleur (servlet) pour la gestion de l'authentification
+ * cette servlet peut être invoquée via l'url '/authentification-servlet'
+ * @author IN-DF-029
+ *
+ */
+public class AuthentificationServlet extends HttpServlet{
+
+	
+	/**
+	 * traitement de la requête envoyée après la soumission du formulaire de la page authentification.jsp
+	 * Cette requête a pour url : http://localhost:8080/gestion-clients/authentification-servlet
+	 * Cette requête possède 2 paramètres : - p-user = valeur saisie dans le champ email
+	 * 										- p-mdp = valeur saisie dans le champ mot de passe
+	 * 
+	 * @param request : requête envoyée par le formulaire
+	 * @param response : réponse à renvoyer vers de le client
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		/*-----------------------------------------------------------------*/
+		/*-------1. récup des params de la requête-------------------------*/
+		/*-----------------------------------------------------------------*/
+		//--> params de la requ = saisie du formulaire
+		
+		/* 1.1. récup de la valeur du param 'p-user'*/
+		String emailUser = request.getParameter("p-user");
+		
+		/* 1.1. récup de la valeur du param 'p-mdp'*/
+		String mdpUser = request.getParameter("p-mdp");
+		
+		/*-----------------------------------------------------------------*/
+		/*-------2. vérif des valeurs des params de la requête-------------*/
+		/*-----------------------------------------------------------------*/
+		
+		//2.1. vérif que les valeurs soient null
+		
+		if (emailUser==null || mdpUser == null) {
+			
+			/* 2.1.1 redirection vers la page du formulaire authentification.jsp*/
+			//---> redirection = délégation
+			RequestDispatcher rd = request.getRequestDispatcher("/authentification.jsp");
+			//- déclenchement de la délégation
+			rd.forward(request, response);
+			
+		}//end if
+		
+	}//end doPost()
+	
+
+}

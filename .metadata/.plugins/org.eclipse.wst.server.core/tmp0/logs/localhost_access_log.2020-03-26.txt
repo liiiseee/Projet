@@ -1,0 +1,17 @@
+127.0.0.1 - - [26/Mar/2020:14:21:04 +0100] "GET / HTTP/1.1" 404 994
+127.0.0.1 - - [26/Mar/2020:14:24:42 +0100] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:14:24:44 +0100] "GET /gestion-clients/ HTTP/1.1" 200 179
+127.0.0.1 - - [26/Mar/2020:15:49:04 +0100] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:49:05 +0100] "GET /gestion-clients/ HTTP/1.1" 200 2140
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:49:05 +0100] "GET /gestion-clients/assets/styles/bootstrap.min.css HTTP/1.1" 200 159515
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:49:05 +0100] "GET /gestion-clients/assets/styles/style.css HTTP/1.1" 200 1002
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:49:05 +0100] "GET /gestion-clients/assets/images/image.jpg HTTP/1.1" 200 65624
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:49:37 +0100] "GET /gestion-clients/ HTTP/1.1" 200 2140
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:49:37 +0100] "GET /gestion-clients/assets/images/image.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:50:26 +0100] "GET /gestion-clients/ HTTP/1.1" 200 2140
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:50:26 +0100] "GET /gestion-clients/assets/styles/style.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:50:26 +0100] "GET /gestion-clients/assets/images/image.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:50:57 +0100] "GET /gestion-clients/ HTTP/1.1" 200 2140
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:50:57 +0100] "GET /gestion-clients/assets/styles/bootstrap.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:51:05 +0100] "GET /gestion-clients/ HTTP/1.1" 200 2140
+0:0:0:0:0:0:0:1 - - [26/Mar/2020:15:51:05 +0100] "GET /gestion-clients/assets/images/image.jpg HTTP/1.1" 304 -

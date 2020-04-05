@@ -1,0 +1,55 @@
+package com.intiformation.gestionclients.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * servlet pour gestion du client
+ * @author IN-DF-029
+ *
+ */
+@WebServlet(name="GestionClientServlet", urlPatterns = {"/gestion-client-servlet"})
+public class GestionClientServlet extends HttpServlet{
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	}// end doGet()
+	
+	
+	/*==============================================*/
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 1. récup de la valeur du param 'action'
+		String userAction = request.getParameter("action");
+		
+		// 2. vérif de la valeur du param action
+		switch (userAction) {
+		case "ajout": // si action = ajout
+			// récup des paramètres de la requête (saisie du formulaire)
+			String nom = request.getParameter("pNom");
+			String prenom = request.getParameter("pPrenom");
+			String adresse = request.getParameter("pAdresse");
+			String ville = request.getParameter("pVille");
+			String codePostal = request.getParameter("pCodePostal");
+			String telephone = request.getParameter("pTelephone");
+			
+			
+			break;
+
+		default:
+			break;
+		}// end switch
+		
+	}// end doPost()
+	
+	
+
+}
