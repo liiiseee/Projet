@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+<meta name="description" content=""/>
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors"/>
+<meta name="generator" content="Jekyll v3.8.6"/>
+<title>page d'authentification</title>
+
+<!-- lien vers la feuille de style de Bootstrap core CSS -->
+<h:outputStylesheet library="styles" name="bootstrap.min.css" ></h:outputStylesheet>
+
+
+<!-- lien vers la feuille de style 'style.css' -->
+<h:outputStylesheet library="styles" name="style.css"/> 
+
+<style type="text/css">
+
+
+
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+
+
+
+
+</h:head>
+
+<body class="text-center"> 
+
+<h:form class="form-signin">
+
+	<!-- image du formulaire  -->
+	
+	<h:graphicImage style="" class="mb-4" library="images" name="image.jpg"  width="100%" height="100%" />
+
+
+		<h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
+		
+		<!-- champ texte pour le  mail  -->
+		
+		<h:outputLabel value="Adresse mail" for="idMail" class="sr-only"/> 
+		<h:inputText value="#{authenticationBean.email}" id="idMail" required="true" requiredMessage="E-mail obligatoire" class="form-control" placeholder="Adresse mail"/> 
+	
+		
+		<!-- champ texte pour le  mot de passe  -->
+		<h:outputLabel value="Mot de passe" for="password" class="sr-only"/> 
+		<h:inputText value="#{authenticationBean.password}" id="password" required="true" requiredMessage="Mot de passe obligatoire" class="form-control" placeholder="Mot de passe"/> 
+		
+		
+		<!--  <div class="checkbox mb-3">
+			<h:outputLabel value="Se souvenir de moi" />
+			
+			<hlabel> <input type="checkbox" value="remember-me">
+				Se souvenir de moi
+			</label>
+		</div>-->
+		
+		<!-- bouton de soumission du formulaire  -->
+	
+			<h:commandButton styleClass="btn btn-lg btn-primary btn-block" value="Se connecter" action="#{authenticationBean.connecterUtilisateur()}"/>
+	
+		
+		
+		<p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
+
+
+
+</h:form >
+
+</body> 
+</html>

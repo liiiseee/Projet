@@ -67,7 +67,7 @@
           </li>
           
           <li class="nav-item">
-         	<h:commandLink class="nav-link"  action="depotCompte" value="Effectuer un dépôt" actionListener="#{gestionCompte.initialiserCompte}"> <span data-feather="file"></span> </h:commandLink>
+         	<h:commandLink class="nav-link"  action="virementCompte" value="Effectuer un virement" actionListener="#{gestionCompte.initialiserCompte}"> <span data-feather="file"></span> </h:commandLink>
           </li>
           
           <li class="nav-item">
@@ -90,13 +90,13 @@
 <div class="container">
 <div class="py-5 text-center">
 	<h:graphicImage library="images" name="banque.jpg" class="d-block mx-auto mb-4" width="80" height="80" />
-    <h2>Modifier le compte</h2>
+    <h2>Attribuer un compte à un client</h2>
    
   </div>
 
 	
 	 
-    <div class="col-md-8 order-md-1">
+    <div style="margin-left: auto; margin-right: auto;" class="col-md-8 order-md-1">
       <h4 class="mb-3">Données du comptes</h4>
       <h:form class="needs-validation" novalidate="true" >
         <div class="row">

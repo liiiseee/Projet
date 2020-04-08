@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+
+<h:outputStylesheet library="styles" name="bootstrap.min.css" ></h:outputStylesheet>
+	<h:outputStylesheet library="styles" name="styleModif.css" ></h:outputStylesheet>
+	
+	<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+
+
+</h:head> 
+
+
+<body class="bg-light">
+
+<h:form>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Gestion des clients</a>
+  <h:inputText class="form-control form-control-dark w-100" placeholder="Search" aria-label="Search"/>
+  
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+    <h:commandLink class="nav-link"  action="#{authenticationBean.deconnecterUtilisateur()}" value="Se déconnecter" />
+
+    </li>
+  </ul>
+  
+</nav>
+
+<br/>
+<br/>
+</h:form>
+
+<div class="container">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+	
+	<h:graphicImage library="images" name="banque.jpg" class="d-block mx-auto mb-4" width="80" height="80" />
+ 
+   
+  </div>
+
+    <br/>
+    <h2 style="text-align: center;">Rechercher un client</h2>
+    <br/>
+    <br/>
+	
+	 
+    <div style="margin-left: auto; margin-right: auto;" class="col-md-8 order-md-1">
+      <h4 class="mb-3">Données du clients</h4>
+      <h:form class="needs-validation" novalidate="true" >
+      
+      <div class="form-row">
+			    <div class="col-md-4 mb-3">
+			      <h:outputLabel value="Identifiant" for="validationDefault01"/>
+			      <h:inputText value="#{gestionclients.idClient}" id="validationDefault01" class="form-control">
+			      </h:inputText>
+			    </div>
+			    
+	    		
+			  </div>
+			  <div style="margin-left: auto; margin-right: auto;">
+			  
+		
+        <h:commandButton  action="rechClient" value="Rechercher" class="btn btn-primary btn-lg btn-block col-md-6 mb-3"/>
+       
+         </div>
+        <br/>
+        <br/>
+        
+        
+        <div class="table-responsive">
+	     <h:dataTable class="table table-striped table-sm" value="#{gestionclients.recherclient()}"  var="client" style="margin-left: 20%" >
+	        
+	        <!-- colonne pour afficher l'id du livre : nom de la colonne + donées -->
+		<h:column>
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="ID" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{client.idClient}" />
+		</h:column>
+		
+		<h:column>
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="nom" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{client.nom}" />
+		</h:column>
+		
+		<h:column>
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="prenom" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{client.prenom}" />
+		</h:column>
+		
+				<h:column>
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="adresse" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{client.adresse}" />
+		</h:column>
+		
+				<h:column>
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="code postale" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{client.codePostal}" />
+		</h:column>
+		
+				<h:column>
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="ville" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{client.ville}" />
+		</h:column>
+		
+		
+				<h:column>
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="téléphone" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{client.telephone}" />
+		</h:column>
+				<h:column>
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="conseiller id" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{client.conseillerId}" />
+		</h:column>
+	        
+	        	
+	    
+	        </h:dataTable>
+      	</div>  
+          
+      </h:form>
+    </div>
+
+
+
+</div>
+
+</body> 
+</html>

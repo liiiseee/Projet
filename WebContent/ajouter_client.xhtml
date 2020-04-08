@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+
+	<title>Formulaire d'ajout</title>
+	<h:outputStylesheet library="styles" name="bootstrap.min.css"></h:outputStylesheet>
+	<h:outputStylesheet library="styles" name="styleModif.css"></h:outputStylesheet>
+
+	<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+	
+	
+}
+</style>
+
+
+
+</h:head>
+
+
+
+<body class="bg-light">
+<h:form>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Gestion des clients</a>
+  <h:inputText class="form-control form-control-dark w-100" placeholder="Search" aria-label="Search"/>
+  
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+    <h:commandLink class="nav-link"  action="#{authenticationBean.deconnecterUtilisateur()}" value="Se déconnecter" />
+
+    </li>
+  </ul>
+  
+</nav>
+</h:form>
+
+
+	<div class="container">
+		<div class="py-5 text-center">
+			<h:graphicImage library="images" name="banque.jpg"
+				class="d-block mx-auto mb-4" width="80" height="80" />
+			<h2>Ajouter un Clients</h2>
+
+		</div>
+
+
+		<div class="py-5 text-center">
+		<div class="col-md-8 order-md-1">
+			<h:form  class="needs-validation" novalidate="true" >
+				<div class="row">
+
+					<div class="col-md-6 mb-3">
+						<h:outputLabel for="idnom" value="Nom" />
+						<h:inputText id="idnom" class="form-control" value="#{gestionclients.client.nom}" />
+						
+					</div>
+					<div class="col-md-6 mb-3">
+								<h:outputLabel for="idprenom" value="Prenom" />
+			<h:inputText id="idprenom" class="form-control" value="#{gestionclients.client.prenom}" />
+					</div>
+
+
+				</div>
+
+
+
+
+
+
+
+
+				<div class="row">
+
+					<div class="col-md-4 mb-3">
+						
+							<h:outputLabel for="idadresse" value="adresse" />
+			<h:inputText id="idadresse" class="form-control" value="#{gestionclients.client.adresse}" />
+					
+					</div>
+					<div class="col-md-4 mb-3">
+								<h:outputLabel for="idcodepostale" value="code postale" />
+			<h:inputText id="idcodepostale" class="form-control"
+				value="#{gestionclients.client.codePostal}" />
+
+					</div>
+					<div class="col-md-4 mb-3">
+
+						<h:outputLabel for="idville" value="ville" />
+			<h:inputText id="idville" class="form-control" value="#{gestionclients.client.ville}" />
+
+					</div>
+
+
+
+
+				</div>
+					<div class="row">
+
+					<div class="col-md-6 mb-3">
+								<h:outputLabel for="idtelephone" value="telephone" />
+			<h:inputText id="idtelephone" class="form-control" 
+				value="#{gestionclients.client.telephone}" />
+						
+					</div>
+					<div class="col-md-6 mb-3">
+								<h:outputLabel for="idconseiller" value="conseiller" />
+			<h:inputText id="idconseiller" class="form-control" 
+				value="#{gestionclients.client.conseillerId}" />
+					</div>
+
+
+				</div>
+
+
+
+
+
+				<hr class="mb-4">
+					<h:commandButton action="listClient"
+						actionListener="#{gestionclients.ajouterclient}" value="Ajouter"
+						class="btn btn-primary btn-lg btn-block" />
+				</hr>
+			</h:form>
+		</div>
+
+	</div>
+
+	</div>
+
+
+
+</body>
+
+</html>

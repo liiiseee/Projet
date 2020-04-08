@@ -4,16 +4,14 @@
   SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#accueil.xhtml:0" NAME="item"
    PATH="/accueil.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="gererClient::#menu-client.xhtml"
-    NAME="output" PATH="/menu-client.xhtml"
-    TARGET="rules:#menu-client.xhtml" TITLE="gererClient" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="gererClient::#menu-Client.xhtml"
+    NAME="output" PATH="/menu-Client.xhtml"
+    TARGET="rules:#menu-Client.xhtml" TITLE="gererClient" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="gererCompte::#menu-comptes.xhtml"
     NAME="output1" PATH="/menu-comptes.xhtml"
     TARGET="rules:#menu-comptes.xhtml" TITLE="gererCompte" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#menu-client.xhtml" PATH="/menu-client.xhtml"
-  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#menu-comptes.xhtml"
   PATH="/menu-comptes.xhtml" SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#modifier-compte.xhtml"
@@ -36,9 +34,6 @@
    <PROCESS-ITEM-OUTPUT ID="retCompte::#retrait-compte.xhtml"
     NAME="output3" PATH="/retrait-compte.xhtml"
     TARGET="rules:#retrait-compte.xhtml" TITLE="retCompte" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="virCompte::#virement-compte.xhtml"
-    NAME="output4" PATH="/virement-compte.xhtml"
-    TARGET="rules:#virement-compte.xhtml" TITLE="virCompte" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="ajoutCompte::#ajout-compte.xhtml"
     NAME="output5" PATH="/ajout-compte.xhtml"
     TARGET="rules:#ajout-compte.xhtml" TITLE="ajoutCompte" model-entity="JSFProcessItemOutput"/>
@@ -54,6 +49,15 @@
    <PROCESS-ITEM-OUTPUT ID="depotCompte::#depot-compte.xhtml"
     NAME="output9" PATH="/depot-compte.xhtml"
     TARGET="rules:#depot-compte.xhtml" TITLE="depotCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="retCompte::#depot-compte.xhtml"
+    NAME="output10" PATH="/depot-compte.xhtml"
+    TARGET="rules:#depot-compte.xhtml" TITLE="retCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="virCompte::#virement-compte.xhtml"
+    NAME="output4" PATH="/virement-compte.xhtml"
+    TARGET="rules:#virement-compte.xhtml" TITLE="virCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="virementCompte::#virement-compte.xhtml"
+    NAME="output11" PATH="/virement-compte.xhtml"
+    TARGET="rules:#virement-compte.xhtml" TITLE="virementCompte" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#retrait-compte.xhtml"
@@ -85,6 +89,9 @@
    <PROCESS-ITEM-OUTPUT ID="listCompte::#menu-comptes.xhtml"
     NAME="output4" PATH="/menu-comptes.xhtml"
     TARGET="rules:#menu-comptes.xhtml" TITLE="listCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="virementCompte::#virement-compte.xhtml"
+    NAME="output5" PATH="/virement-compte.xhtml"
+    TARGET="rules:#virement-compte.xhtml" TITLE="virementCompte" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:modifier-compte.xhtml"
@@ -106,6 +113,12 @@
    <PROCESS-ITEM-OUTPUT ID="menuCompte::#menu-comptes.xhtml"
     NAME="output4" PATH="/menu-comptes.xhtml"
     TARGET="rules:#menu-comptes.xhtml" TITLE="menuCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="virementCompte::#virement-compte.xhtml"
+    NAME="output5" PATH="/virement-compte.xhtml"
+    TARGET="rules:#virement-compte.xhtml" TITLE="virementCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ajoutCompte::#ajout-compte.xhtml"
+    NAME="output6" PATH="/ajout-compte.xhtml"
+    TARGET="rules:#ajout-compte.xhtml" TITLE="ajoutCompte" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:attribuer-compte.xhtml"
@@ -127,6 +140,12 @@
    <PROCESS-ITEM-OUTPUT ID="menuCompte::#menu-comptes.xhtml"
     NAME="output4" PATH="/menu-comptes.xhtml"
     TARGET="rules:#menu-comptes.xhtml" TITLE="menuCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="virementCompte::#virement-compte.xhtml"
+    NAME="output5" PATH="/virement-compte.xhtml"
+    TARGET="rules:#virement-compte.xhtml" TITLE="virementCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ajoutCompte::#ajout-compte.xhtml"
+    NAME="output6" PATH="/ajout-compte.xhtml"
+    TARGET="rules:#ajout-compte.xhtml" TITLE="ajoutCompte" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:depot-compte.xhtml" PATH="depot-compte.xhtml"
@@ -148,15 +167,45 @@
    <PROCESS-ITEM-OUTPUT ID="menuCompte::#menu-comptes.xhtml"
     NAME="output4" PATH="/menu-comptes.xhtml"
     TARGET="rules:#menu-comptes.xhtml" TITLE="menuCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="virementCompte::#virement-compte.xhtml"
+    NAME="output5" PATH="/virement-compte.xhtml"
+    TARGET="rules:#virement-compte.xhtml" TITLE="virementCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ajoutCompte::#ajout-compte.xhtml"
+    NAME="output6" PATH="/ajout-compte.xhtml"
+    TARGET="rules:#ajout-compte.xhtml" TITLE="ajoutCompte" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:recherche-compte.xhtml"
   PATH="recherche-compte.xhtml" SHAPE="96,1025,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:recherche-compte.xhtml:0" NAME="item"
    PATH="recherche-compte.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="listCompte::#compte-trouves.xhtml"
-    NAME="output" PATH="/compte-trouves.xhtml"
-    TARGET="rules:#compte-trouves.xhtml" TITLE="listCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ajoutCompte::#ajout-compte.xhtml"
+    NAME="output" PATH="/ajout-compte.xhtml"
+    TARGET="rules:#ajout-compte.xhtml" TITLE="ajoutCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="listCompte::#recherche-compte.xhtml"
+    NAME="output1" PATH="/recherche-compte.xhtml"
+    TARGET="rules:#recherche-compte.xhtml" TITLE="listCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="menuPrinc::#accueil.xhtml" NAME="output2"
+    PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml"
+    TITLE="menuPrinc" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="attribCompte::#attribuer-compte.xhtml"
+    NAME="output3" PATH="/attribuer-compte.xhtml"
+    TARGET="rules:#attribuer-compte.xhtml" TITLE="attribCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="cherchCompte::#recherche-compte.xhtml"
+    NAME="output4" PATH="/recherche-compte.xhtml"
+    TARGET="rules:#recherche-compte.xhtml" TITLE="cherchCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="menuCompte::#menu-comptes.xhtml"
+    NAME="output5" PATH="/menu-comptes.xhtml"
+    TARGET="rules:#menu-comptes.xhtml" TITLE="menuCompte" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:retrait-compte.xhtml"
+  PATH="retrait-compte.xhtml" SHAPE="96,1057,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:retrait-compte.xhtml:0" NAME="item"
+   PATH="retrait-compte.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="listCompte::#menu-comptes.xhtml"
+    NAME="output" PATH="/menu-comptes.xhtml"
+    TARGET="rules:#menu-comptes.xhtml" TITLE="listCompte" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="menuPrinc::#accueil.xhtml" NAME="output1"
     PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml"
     TITLE="menuPrinc" model-entity="JSFProcessItemOutput"/>
@@ -169,8 +218,85 @@
    <PROCESS-ITEM-OUTPUT ID="menuCompte::#menu-comptes.xhtml"
     NAME="output4" PATH="/menu-comptes.xhtml"
     TARGET="rules:#menu-comptes.xhtml" TITLE="menuCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="virementCompte::#virement-compte.xhtml"
+    NAME="output5" PATH="/virement-compte.xhtml"
+    TARGET="rules:#virement-compte.xhtml" TITLE="virementCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="ajoutCompte::#ajout-compte.xhtml"
+    NAME="output6" PATH="/ajout-compte.xhtml"
+    TARGET="rules:#ajout-compte.xhtml" TITLE="ajoutCompte" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#compte-trouves.xhtml"
-  PATH="/compte-trouves.xhtml" SHAPE="368,1617,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:virement-compte.xhtml"
+  PATH="virement-compte.xhtml" SHAPE="96,1057,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:virement-compte.xhtml:0" NAME="item"
+   PATH="virement-compte.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="ajoutCompte::#ajout-compte.xhtml"
+    NAME="output" PATH="/ajout-compte.xhtml"
+    TARGET="rules:#ajout-compte.xhtml" TITLE="ajoutCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="listCompte::#menu-comptes.xhtml"
+    NAME="output1" PATH="/menu-comptes.xhtml"
+    TARGET="rules:#menu-comptes.xhtml" TITLE="listCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="menuPrinc::#accueil.xhtml" NAME="output2"
+    PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml"
+    TITLE="menuPrinc" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="cherCompte::#recherche-compte.xhtml"
+    NAME="output3" PATH="/recherche-compte.xhtml"
+    TARGET="rules:#recherche-compte.xhtml" TITLE="cherCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="menuCompte::#menu-comptes.xhtml"
+    NAME="output4" PATH="/menu-comptes.xhtml"
+    TARGET="rules:#menu-comptes.xhtml" TITLE="menuCompte" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="virementCompte::#virement-compte.xhtml"
+    NAME="output5" PATH="/virement-compte.xhtml"
+    TARGET="rules:#virement-compte.xhtml" TITLE="virementCompte" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#menu-Client.xhtml" PATH="/menu-Client.xhtml"
+  SHAPE="368,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#menu-Client.xhtml:0" NAME="item"
+   PATH="/menu-Client.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="addClient::#ajouter_client.xhtml"
+    NAME="output" PATH="/ajouter_client.xhtml"
+    TARGET="rules:#ajouter_client.xhtml" TITLE="addClient" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="listClient::#menu-Client.xhtml"
+    NAME="output1" PATH="/menu-Client.xhtml"
+    TARGET="rules:#menu-Client.xhtml" TITLE="listClient" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="editClient::#modifier_client.xhtml"
+    NAME="output2" PATH="/modifier_client.xhtml"
+    TARGET="rules:#modifier_client.xhtml" TITLE="editClient" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="accueil::#accueil.xhtml" NAME="output3"
+    PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml" TITLE="accueil" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="rechercherclient::#rechercher_client.xhtml"
+    NAME="output4" PATH="/rechercher_client.xhtml"
+    TARGET="rules:#rechercher_client.xhtml" TITLE="rechercherclient" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#ajouter_client.xhtml"
+  PATH="/ajouter_client.xhtml" SHAPE="96,721,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#ajouter_client.xhtml:0" NAME="item"
+   PATH="/ajouter_client.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="listClient::#menu-Client.xhtml"
+    NAME="output" PATH="/menu-Client.xhtml"
+    TARGET="rules:#menu-Client.xhtml" TITLE="listClient" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#modifier_client.xhtml"
+  PATH="/modifier_client.xhtml" SHAPE="640,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#modifier_client.xhtml:0" NAME="item"
+   PATH="/modifier_client.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="listClient::#menu-Client.xhtml"
+    NAME="output" PATH="/menu-Client.xhtml"
+    TARGET="rules:#menu-Client.xhtml" TITLE="listClient" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#rechercher_client.xhtml"
+  PATH="/rechercher_client.xhtml" SHAPE="640,257,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:rechercher_client.xhtml"
+  PATH="rechercher_client.xhtml" SHAPE="640,721,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:rechercher_client.xhtml:0" NAME="item"
+   PATH="rechercher_client.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="rechClient::#rechercher_client.xhtml"
+    NAME="output" PATH="/rechercher_client.xhtml"
+    TARGET="rules:#rechercher_client.xhtml" TITLE="rechClient" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

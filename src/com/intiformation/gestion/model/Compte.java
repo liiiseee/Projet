@@ -11,6 +11,9 @@ public class Compte implements Serializable{
 	private double decouvert;
 	private double taux;
 	private double conseillerId;
+	private double montant;
+	private int idCompteRec;
+	private double soldeRec;
 
 	
 	/*__________ Constructeurs ____________*/
@@ -169,6 +172,33 @@ public class Compte implements Serializable{
 	}
 	public void setConseillerId(double conseillerId) {
 		this.conseillerId = conseillerId;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public double getSoldeRec() {
+		return soldeRec;
+	}
+	public void setSoldeRec(double soldeRec) {
+		this.soldeRec = soldeRec;
+	}
+	public int getIdCompteRec() {
+		return idCompteRec;
+	}
+	public void setIdCompteRec(int idCompteRec) {
+		this.idCompteRec = idCompteRec;
+	}
+	public double getMontant() {
+		return montant;
+	}
+	public void setMontant(double montant) {
+		this.montant = montant;
 	}
 	/*_____________ Méthodes ______________*/
 	@Override

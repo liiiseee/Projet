@@ -30,7 +30,7 @@
 <body> 
 
 <div class="table-responsive">
-	     <h:dataTable class="table table-striped table-sm" value="#{gestionCompte.findCompteById()}"  var="compte" style="margin-left: 20%" >
+	     <h:dataTable class="table table-striped table-sm" value="#{gestionCompte.chercherCompte()}"  var="compte" style="margin-left: 20%" >
 	        
 	        <!-- colonne pour afficher l'id du livre : nom de la colonne + donées -->
 		<h:column>
@@ -42,14 +42,14 @@
 			<h:outputText value="#{compte.idCompte}" />
 		</h:column>
 		
-		<h:column>
-			<!-- en-tête de la colonne -->
+		<!-- <h:column>
+			en-tête de la colonne 
 			<f:facet name="header">
 				<h:outputText value="Id du client" />
 			</f:facet>
-			<!-- donnée de la colonne -->
+		 	 donnée de la colonne 
 			<h:outputText value="#{compte.clientID}" />
-		</h:column>
+		</h:column> -->
 		<h:column>
 			<!-- en-tête de la colonne -->
 			<f:facet name="header">

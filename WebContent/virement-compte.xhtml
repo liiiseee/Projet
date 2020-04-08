@@ -2,11 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      > 
+      xmlns:h="http://java.sun.com/jsf/html"> 
 
-<h:head><title>rechercher un compte</title>
+<h:head>
+<title>virement</title>
 	<h:outputStylesheet library="styles" name="bootstrap.min.css" ></h:outputStylesheet>
 	<h:outputStylesheet library="styles" name="styleModif.css" ></h:outputStylesheet>
 	
@@ -26,9 +25,9 @@
         }
       }
     </style>
-</h:head> 
-<body class="bg-light">
 
+</h:head> 
+<body class="bg-light"> 
 
 <h:form>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -68,6 +67,7 @@
          	<h:commandLink class="nav-link"  action="cherCompte" value="Chercher un compte"> <span data-feather="file"></span> </h:commandLink>
           </li>
           
+           
           <li class="nav-item">
          	<h:commandLink class="nav-link"  action="virementCompte" value="Effectuer un virement" actionListener="#{gestionCompte.initialiserCompte}"> <span data-feather="file"></span> </h:commandLink>
           </li>
@@ -90,127 +90,70 @@
 </h:form>
 
 <div class="container">
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<div class="py-5 text-center">
 	<h:graphicImage library="images" name="banque.jpg" class="d-block mx-auto mb-4" width="80" height="80" />
-	</div>
-	<br/>
-    <h2 style="text-align: center;">Rechercher un compte</h2>
-    
-    <br/>
-    <br/>
+    <h2>Effectuer un virement</h2>
    
-  
+  </div>
 
 	
 	 
     <div style="margin-left: auto; margin-right: auto;" class="col-md-8 order-md-1">
       <h4 class="mb-3">Données du comptes</h4>
       <h:form class="needs-validation" novalidate="true" >
-      
-      <div class="form-row">
-			    <div class="col-md-4 mb-3">
-			      <h:outputLabel value="Identifiant" for="validationDefault01"/>
-			      <h:inputText value="#{gestionCompte.idCompte}" id="validationDefault01" class="form-control">
-			      	<!--  <f:param id="cherchCompte" name="id" value="#{gestionCompte.compte.idCompte}"/> -->
-			      </h:inputText>
-			    </div>
-			    
-	    		
-			  </div>
-			  
-			 
-			  
-		
-      <div style="margin-left: auto; margin-right: auto;">
-      	
-        <h:commandButton action="cherchCompte"  value="Rechercher" class="btn btn-primary btn-lg btn-block col-md-6 mb-3" />
-         </div>
-       
-       
-           </h:form>
-    </div>
-   
-	
-	<div class="table-responsive">
-	     <h:dataTable class="table table-striped table-sm" value="#{gestionCompte.chercherCompte()}"  var="compte" style="margin-left: 20%" >
-	        
-	        <!-- colonne pour afficher l'id du livre : nom de la colonne + donées -->
-		<h:column>
-			<!-- en-tête de la colonne -->
-			<f:facet name="header">
-				<h:outputText value="ID" />
-			</f:facet>
-			<!-- donnée de la colonne -->
-			<h:outputText value="#{compte.idCompte}" />
-		</h:column>
-		
-		<h:column>
-			<!--  en-tête de la colonne -->
-			<f:facet name="header">
-				<h:outputText value="Id du client" />
-			</f:facet>
-		 	 <!--  donnée de la colonne -->
-			<h:outputText value="#{compte.clientID}" />
-		</h:column> 
-		<h:column>
-			<!-- en-tête de la colonne -->
-			<f:facet name="header">
-				<h:outputText value="Solde" />
-			</f:facet>
-			<!-- donnée de la colonne -->
-			<h:outputText value="#{compte.solde}" />
-		</h:column>
-		<h:column>
-			<!-- en-tête de la colonne -->
-			<f:facet name="header">
-				<h:outputText value="Type de compte" />
-			</f:facet>
-			<!-- donnée de la colonne -->
-			<h:outputText value="#{compte.typeCompte}" />
-		</h:column>
-		<h:column>
-			<!-- en-tête de la colonne -->
-			<f:facet name="header">
-				<h:outputText value="Taux" />
-			</f:facet>
-			<!-- donnée de la colonne -->
-			<h:outputText value="#{compte.taux}" />
-		</h:column>
-		<h:column>
-			<!-- en-tête de la colonne -->
-			<f:facet name="header">
-				<h:outputText value="Découvert autorisé" />
-			</f:facet>
-			<!-- donnée de la colonne -->
-			<h:outputText value="#{compte.decouvert}" />
-		</h:column>
-	        
-	        	
-	    
-	        </h:dataTable>
-      	</div>
-		
-     
-
-
-
-
-     
-
-      
-
+        <div class="row">
         
-        
-
-     
-       
-        
+        <div class="col-md-6 mb-3">
+          <h:outputLabel value="Identifiant du compte" for="idCompte"  />
+            <h:inputText id="idCompte" value="#{gestionCompte.compte.idCompte}" class = "form-control"  required="true" >
+            	<!--  <f:param id="depIdCompte" name="id" value="#{gestionCompte.compte.idCompte}"/> -->
+            </h:inputText>
+            <div class="invalid-feedback">
+             Identifiant du compte donneur
+            </div>
+          </div>
           
-   
+          <div class="col-md-6 mb-3">
+          <h:outputLabel value="Identifiant du compte receveur" for="idCompteR"  />
+            <h:inputText id="idCompteR" value="#{gestionCompte.compte.idCompteRec}" class = "form-control"  required="true" > 
+            </h:inputText>
+            <div class="invalid-feedback">
+             Identifiant du compte receveur
+            </div>
+          </div>
+     
+          
+          <div class="col-md-6 mb-3">
+          	<h:outputLabel value="Montant à transférer" for="idMontant"  />
+            <h:inputText class = "form-control" id="idMontant" required="true" value="#{gestionCompte.montant}">
+            </h:inputText>
+            </div> 
+          
+       
+        </div>
 
 
 
-</div>
+
+     
+        
+
+     
+       
+        
+         <hr class="mb-4"> 
+      
+        <h:commandButton action="listCompte" actionListener="#{gestionCompte.virementCompte}" value="Valider" class="btn btn-primary btn-lg btn-block col-md-6 mb-3"> 
+        
+        </h:commandButton>
+        
+        </hr> 
+      </h:form>
+    </div>
+
+
+
+</div> 
 
 </body> 
 </html>

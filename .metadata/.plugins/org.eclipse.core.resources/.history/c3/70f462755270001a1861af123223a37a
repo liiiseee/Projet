@@ -1,7 +1,0 @@
-package com.intiformation.gestioncomptejdbc.dao;
-
-import com.intiformation.gestioncomptejdbc.modele.Client;
-
-public interface IClientDAO extends IGeneraleDAO<Client> {
-
-}

@@ -69,6 +69,10 @@
           </li>
           
           <li class="nav-item">
+         	<h:commandLink class="nav-link"  action="virementCompte" value="Effectuer un virement" actionListener="#{gestionCompte.initialiserCompte}"> <span data-feather="file"></span> </h:commandLink>
+          </li>
+          
+          <li class="nav-item">
           	<h:commandLink class="nav-link"  action="menuCompte" value="Retour au menu des comptes"> </h:commandLink>
           </li>
 
@@ -94,7 +98,7 @@
 
 	
 	 
-    <div class="col-md-8 order-md-1">
+    <div style="margin-left: auto; margin-right: auto;" class="col-md-8 order-md-1">
       <h4 class="mb-3">Données du comptes</h4>
       <h:form class="needs-validation" novalidate="true" >
         <div class="row">

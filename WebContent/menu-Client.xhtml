@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+
+	<h:outputStylesheet library="styles" name="bootstrap.min.css" />
+
+	<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+
+	<h:outputStylesheet library="styles" name="dashboard.css" />
+
+
+
+
+</h:head>
+<body>
+
+<h:form>
+		
+
+	    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Gestion des Clients</a>
+  <h:inputText class="form-control form-control-dark w-100" placeholder="Search" aria-label="Search"/>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+        <h:commandLink class="nav-link"  action="#{authenticationBean.deconnecterUtilisateur()}" value="Se déconnecter" />
+    
+    </li>
+  </ul>
+  </nav>
+
+<div class="container-fluid" >
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar" >
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Liste des clients <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <span data-feather="file"></span>
+          <h:commandLink class="nav-link" action="addClient" actionListener="#{gestionclients.initialiserClient}" value="Ajouter un Client " > <span data-feather="file"></span> </h:commandLink>
+               
+          </li>
+       
+         <li class="nav-item">
+              <span data-feather="shopping-cart"></span>
+           <h:commandLink class="nav-link" action="rechercherclient" actionListener="#{gestionclients.initialiserClient}" value="Chercher un client par son id " > <span data-feather="file"></span> </h:commandLink>
+           
+          </li>
+
+          <li class="nav-item">
+         <span data-feather="file"></span>
+          <h:commandLink class="nav-link" action="accueil" actionListener="#{gestionclients.naviguerVersacceuil()}" value="Retour à l'accueil " > <span data-feather="file"></span> </h:commandLink>
+          </li>
+          </ul>
+          
+
+       
+      </div>
+    </nav>
+    </div>
+    </div>
+
+
+
+<br/> <br/> <br/>
+
+		<h2 style="text-align: center;">Liste des Clients</h2>
+
+		<div class="table-responsive">
+
+
+					<h:dataTable  class="table table-striped table-sm" style="margin-left: 20%" value="#{gestionclients.findallClientBdd()}"
+						var="client" border="1" width="60%">
+
+						<h:column>
+
+							<!-- en tete de la colonne -->
+
+							<f:facet name="header">
+								<h:outputText class="col-md-1" value="Id Client" />
+							</f:facet>
+
+							<!-- donnée de la colonne  -->
+							<h:outputText value="#{client.idClient}" />
+						</h:column>
+
+
+
+						<h:column>
+
+							<!-- en tete de la colonne -->
+
+							<f:facet class="col-md-1" name="header">
+								<h:outputText value="nom" />
+							</f:facet>
+
+							<!-- donnée de la colonne  -->
+							<h:outputText value="#{client.nom}" />
+						</h:column>
+
+
+						<h:column>
+
+							<!-- en tete de la colonne -->
+
+							<f:facet class="col-md-1" name="header">
+								<h:outputText value="prenom" />
+							</f:facet>
+
+							<!-- donnée de la colonne  -->
+							<h:outputText value="#{client.prenom}" />
+						</h:column>
+
+
+
+						<h:column>
+
+							<!-- en tete de la colonne -->
+
+							<f:facet class="col-md-1" name="header">
+								<h:outputText value="adresse" />
+							</f:facet>
+							<h:outputText value="#{client.adresse}" />
+
+						</h:column>
+
+						<h:column>
+
+							<!-- en tete de la colonne -->
+
+							<f:facet class="col-md-1" name="header">
+								<h:outputText value="ville" />
+							</f:facet>
+							<h:outputText value="#{client.ville}" />
+
+
+						</h:column>
+
+
+						<h:column>
+
+							<!-- en tete de la colonne -->
+
+							<f:facet class="col-md-1" name="header">
+								<h:outputText value="codePostal" />
+							</f:facet>
+							<h:outputText value="#{client.codePostal}" />
+
+
+						</h:column>
+
+
+						<h:column>
+
+							<!-- en tete de la colonne -->
+
+							<f:facet class="col-md-1" name="header">
+								<h:outputText value="telephone" />
+							</f:facet>
+							<h:outputText value="#{client.telephone}" />
+
+
+						</h:column>
+						
+						
+						<h:column>
+<f:facet class="col-md-1" name="header">
+<h:outputText value="Supprimer" />
+</f:facet>
+ 
+<h:commandLink id="delete" action="listClient" actionListener="#{gestionclients.supprimerClient}">
+
+<!-- passage de paramètre au composant : nom deleteID/ valeur idLivre -->
+<f:param id="deleteID" name="id" value="#{client.idClient}" />
+
+<!-- label du lien -->
+<h:outputText value="supprimer" />
+
+
+</h:commandLink>
+
+</h:column>
+
+
+						<h:column>
+<f:facet class="col-md-1" name="header">
+<h:outputText value="Modifier" />
+</f:facet>
+ 
+<h:commandLink id="modifier" action="editClient" actionListener="#{gestionclients.selectionnerClient}">
+
+<!-- passage de paramètre au composant : nom deleteID/ valeur idLivre -->
+  <f:param id="updateID" name="id" value="#{client.idClient}" />
+
+<!-- label du lien -->
+  <h:outputText value="modifier" />
+
+
+</h:commandLink>
+
+</h:column>
+
+-->
+
+
+
+
+					</h:dataTable>
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</h:form>
+</body>
+</html>

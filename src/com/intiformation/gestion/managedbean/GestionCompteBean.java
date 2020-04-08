@@ -1,7 +1,7 @@
 package com.intiformation.gestion.managedbean;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +18,7 @@ import com.intiformation.gestion.dao.CompteDaoImpl;
 import com.intiformation.gestion.dao.ICompteDAO;
 import com.intiformation.gestion.model.Compte;
 import com.intiformation.gestion.model.Conseiller;
+import com.mysql.fabric.xmlrpc.base.Params;
 
 @ManagedBean (name = "gestionCompte")
 @SessionScoped
@@ -25,13 +26,16 @@ public class GestionCompteBean implements Serializable{
 	
 	/*____________________propriétés____________________________*/
 	List<Compte> listeCompteBdd;
-	double montant;
+	private double montant;
+	private int idCompte;
 	
 	//-> prop compte pour ajout et modification
 	private Compte compte;
+	private Compte compte2;
 	
 	//-> dao du compte
 	ICompteDAO compteDAO;
+	
 	
 	/*____________________ctors_____________________________*/
 	/**
@@ -42,15 +46,32 @@ public class GestionCompteBean implements Serializable{
 		compteDAO = new CompteDaoImpl();
 	}
 	
+	
+	
+	public GestionCompteBean(double montant) {
+		this.montant = montant;
+	}
+
+
+
 	/*__________________méthodes___________________________*/
+	
+	
+	public List<Integer> getAllID(ActionEvent event) {
+		UIParameter cp =  (UIParameter) event.getComponent().findComponent("cherchCompte");
+		int compteId = (int) cp.getValue();
+		List<Integer> listeID = compteDAO.getAllID();
+		return listeID;
+		
+	}
 	
 public Compte findCompteById(ActionEvent event) {
 	UIParameter cp =  (UIParameter) event.getComponent().findComponent("cherchCompte");
 	
 	//2. récup de la valeur du param => l'id du livre à supprimer
 	int compteId = (int) cp.getValue();
-		compte = compteDAO.getCompteByID(compteId);
-		return compte;
+		Compte comptebdd = compteDAO.getCompteByID(compteId);
+		return comptebdd;
 		
 	}
 	
@@ -74,6 +95,7 @@ public Compte findCompteById(ActionEvent event) {
 		//1. récup du param passé dans le composant au click du lien 'editer'
 		UIParameter cp =  (UIParameter) event.getComponent().findComponent("updateID");
 		
+		
 		//2. récup de la valeur du param => l'id du compte à modifier
 		int compteId = (int) cp.getValue();
 		
@@ -81,8 +103,56 @@ public Compte findCompteById(ActionEvent event) {
 		Compte compteModif = compteDAO.getByID(compteId);
 		
 		
+		// 4. affectation du compte à modifier à  la prop 'compte' du managedbean
+		setCompte(compteModif);
+		
+		/**
+		 * dans la paeg modifier_compte.xhtml on récupère le compte à modifier via la prop compte du MB
+		 */
+		
+	}// end selectionnerCompte
+	
+/*public void selectionnerCompteRech(ActionEvent event) {
+		
+		//1. récup du param passé dans le composant au click du lien 'editer'
+		UIParameter cp =  (UIParameter) event.getComponent().findComponent("idCompteCh");
+		
+		
+		//2. récup de la valeur du param => l'id du compte à modifier
+		int compteId = (int) cp.getValue();
+		
+		// 3. récup du compte à modifier dans la bdd via l'id et la dao
+		Compte compteById = compteDAO.getByID(compteId);
+		
+		
+		// 4. affectation du compte à modifier à  la prop 'livre' du managedbean
+		setCompte(compteById);
+		
+		
+		  dans la paeg modifier_compte.xhtml on récupère le compte à modifier via la prop compte du MB
+		
+		
+	} end selectionnerCompte*/
+	
+	
+public void selectionnerCompteVir(ActionEvent event) {
+		
+		//1. récup du param passé dans le composant au click du lien 'editer'
+		UIParameter cp =  (UIParameter) event.getComponent().findComponent("virementID");
+		//UIParameter cpnt =  (UIParameter) event.getComponent().findComponent("virementID2");
+		
+		
+		//2. récup de la valeur du param => l'id du compte à modifier
+		int compteId = (int) cp.getValue();
+		//int compteId2 = (int) cpnt.getValue();
+		
+		// 3. récup du compte à modifier dans la bdd via l'id et la dao
+		Compte compteModif = compteDAO.getByID(compteId);
+		//Compte compteM = compteDAO.getByID(compteId2);
+		
 		// 4. affectation du compte à modifier à  la prop 'livre' du managedbean
 		setCompte(compteModif);
+		//setCompte2(compteM);
 		
 		/**
 		 * dans la paeg modifier_compte.xhtml on récupère le compte à modifier via la prop compte du MB
@@ -143,11 +213,14 @@ public void supprimerCompte(ActionEvent event) {
 	}// end supprimerCompte()
 
 public void initialiserCompte(ActionEvent event) {
-	// instanciation d'un nouveau objet livre vide
+	// instanciation d'un nouveau objet compte vide
 	Compte compteAdd = new Compte();
+
 	
-	// affectation de l'objet à la propriété livre du MB
+	
+	// affectation de l'objet à la propriété compte du MB
 	setCompte(compteAdd);
+	setCompte2(compteAdd);
 	
 	
 }// end initialiserLivre()
@@ -229,22 +302,17 @@ public void attribuerCompte (ActionEvent event) {
 
 
 public void depotCompte (ActionEvent event) {
-	//récup du contexte JSF pour l'envoi du msg vers la vue
-		
-		montant = (double) event.getComponent().getAttributes().get("montantDepot");
-		FacesContext contextJSF = FacesContext.getCurrentInstance();
-		UIParameter cpnt =  (UIParameter) event.getComponent().findComponent("depotID");
 	
-		//1. récup du param passé dans le composant au click du lien 'depot'
+		FacesContext contextJSF = FacesContext.getCurrentInstance();
+		
+		
 				
-		
-		
-				//UIParameter comp =  (UIParameter) event.getComponent().findComponent("montDep");
-				//2. récup de la valeur du param => l'id du livre à supprimer
-				//double montantC = (double) comp.getValue();
+				//Compte compteDepot = new Compte();
+				//montant = compteDepot.getMontant();
 		
 		//ajout dans bdd
 		if (compteDAO.deposit(compte, montant)) {
+			System.out.println("dans dépot if");
 			// ajout OK
 			/*message vers la vue*/
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Opération réussie", " - Le dépôt a bien été effectué");
@@ -260,41 +328,78 @@ public void depotCompte (ActionEvent event) {
 		
 	}//end attribuerCompte()
 
-public void chercherCompte(ActionEvent event) {
+public void retraitCompte (ActionEvent event) {
 	
-	//1. récup du param passé dans le composant au click du lien 'supprimer'
-	UIParameter cp =  (UIParameter) event.getComponent().findComponent("cherchCompte");
-	
-	//2. récup de la valeur du param => l'id du livre à supprimer
-	int compteId = (int) cp.getValue();
-	
-	
-	// 3. suppression du livre dans la bdd via dao
-	//3.1. récup du context de JSF
 	FacesContext contextJSF = FacesContext.getCurrentInstance();
 	
-	compteDAO.getCompteByID(compteId);
+				
+			
+			//Compte compteDepot = new Compte();
+			//montant = compteDepot.getMontant();
 	
-	
-	
-	//3.2. suppression + message
-	if (compteDAO.getCompteByID(compteId) != null) {
-		//--suppresion ok
+	//ajout dans bdd
+	if (compteDAO.retrait(compte, montant)) {
+		System.out.println("dans dépot if");
+		// ajout OK
+		/*message vers la vue*/
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Opération réussie", " - Le retrait a bien été effectué");
+		contextJSF.addMessage(null, message);
 		
-		/* envoi d'un msg vers la vue via le context*/
-		contextJSF.addMessage(null, new FacesMessage("Le compte a été retrouvé"));
-		
-		
-	}else {
-		//--suppresion not ok
-		
-		/* envoi d'un msg vers la vue via le context*/
-		contextJSF.addMessage(null, new FacesMessage("La suppression du compte a échouée"));
-		
+	} else {
+		// ajout NOT  OK
+		/*message vers la vue*/
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Echec du dépôt ", " - Le retrait a échoué");
+		contextJSF.addMessage(null, message);
+
 	}//end else
 	
+}//end attribuerCompte()
+
+public void virementCompte (ActionEvent event) {
 	
-}// end supprimerCompte()
+	FacesContext contextJSF = FacesContext.getCurrentInstance();
+				
+	
+			
+			//Compte compteDepot = new Compte();
+			//montant = compteDepot.getMontant();
+	
+	//ajout dans bdd
+	if (compteDAO.transfert(compte, compte2, montant)) {
+		
+		System.out.println("dans virement if");
+		// ajout OK
+		/*message vers la vue*/
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Opération réussie", " - Le virement a bien été effectué");
+		contextJSF.addMessage(null, message);
+		
+	} else {
+		// ajout NOT  OK
+		/*message vers la vue*/
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Echec du dépôt ", " - Le virement a échoué");
+		contextJSF.addMessage(null, message);
+
+	}//end else
+	
+}//end
+
+
+public List<Compte> chercherCompte() {
+	
+	//1. récup du param passé dans le composant au click du lien 'supprimer'
+	
+	List<Compte> listeCompte = new ArrayList();
+	if (idCompte != 0) {
+		listeCompte.add(compteDAO.getCompteByID(idCompte));
+		
+	}
+	return listeCompte;
+	
+	
+}
+	
+	
+
 
 	
 	
@@ -332,6 +437,32 @@ public void chercherCompte(ActionEvent event) {
 	public void setMontant(double montant) {
 		this.montant = montant;
 	}
+
+
+
+	public Compte getCompte2() {
+		return compte2;
+	}
+
+
+
+	public void setCompte2(Compte compte2) {
+		this.compte2 = compte2;
+	}
+
+
+
+	public int getIdCompte() {
+		return idCompte;
+	}
+
+
+
+	public void setIdCompte(int idCompte) {
+		this.idCompte = idCompte;
+	}
+	
+	
 	
 	
 

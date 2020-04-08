@@ -67,8 +67,9 @@
          	<h:commandLink class="nav-link"  action="cherCompte" value="Chercher un compte" actionListener="#{gestionCompte.initialiserCompte}"> <span data-feather="file"></span> </h:commandLink>
           </li>
           
+          
           <li class="nav-item">
-         	<h:commandLink class="nav-link"  action="depotCompte" value="Effectuer un dépôt" actionListener="#{gestionCompte.initialiserCompte}"> <span data-feather="file"></span> </h:commandLink>
+         	<h:commandLink class="nav-link"  action="virementCompte" value="Effectuer un virement" actionListener="#{gestionCompte.initialiserCompte}"> <span data-feather="file"></span> </h:commandLink>
           </li>
 
           <li class="nav-item">
@@ -191,7 +192,7 @@
 				attribut du lien -action : définition d'une clé d'outcome pour la navigation (ref faces-config.xml)
 								- actionListener : méthode à invoquer dans le managedbean
 			 -->
-			<h:commandLink id="depot" action="depCompte" actionListener="#{gestionCompte.selectionnerCompte}" > 
+			<h:commandLink id="depot" action="depCompte" actionListener="#{gestionCompte.selectionnerCompteDep}" > 
 				<!-- passage de param au composant : nom deleteID/ valeur = l'id du livre -->
 				<f:param id="depotID" name="id" value="#{compte.idCompte}"/>
 				
@@ -223,26 +224,7 @@
 		
 		</h:column>
 		
-		<h:column>
-		<!-- en-tête de la colonne -->
-			<f:facet name="header">
-				<h:outputText value=" Effectuer un virement" />
-			</f:facet>
-			<!-- donnée de la colonne  lien pour retirer-->
-			<!-- 
-				attribut du lien -action : définition d'une clé d'outcome pour la navigation (ref faces-config.xml)
-								- actionListener : méthode à invoquer dans le managedbean
-			 -->
-			<h:commandLink id="virement" action="virCompte" actionListener="#{gestionCompte.selectionnerCompte}" > 
-				<!-- passage de param au composant : nom deleteID/ valeur = l'id du compte -->
-				<f:param id="virementID" name="id" value="#{compte.idCompte}"/>
-				
-				<!-- label du lien -->
-				<h:outputText value="virement" />
-				
-			</h:commandLink>
 		
-		</h:column>
          
 	</h:dataTable>
 	</div>

@@ -1,314 +1,657 @@
 <?xml version="1.0"?>
-<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+<faces-config version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-<!-- ==================================================================== -->
- 	<!-- =============CONFIG DE LA NAVIGATION================================ -->
- 	<!-- ==================================================================== -->
- 	
- 	<!-- 1. règles de navigation pour la page 'accueil.xhtml' -->
- 	<navigation-rule>
- 		<!-- 1.1. page de départ -->
- 		<from-view-id>/accueil.xhtml</from-view-id>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans accueil)-->
- 				<from-outcome>gererClient</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-client.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans accueil)-->
- 				<from-outcome>gererCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		
- 		
+	<!-- ==================================================================== -->
+	<!-- =============CONFIG DE LA NAVIGATION================================ -->
+	<!-- ==================================================================== -->
+
+	<!-- 1. règles de navigation pour la page 'accueil.xhtml' -->
+	<navigation-rule>
+		<!-- 1.1. page de départ -->
+		<from-view-id>/accueil.xhtml</from-view-id>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans accueil) -->
+			<from-outcome>gererClient</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-Client.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans accueil) -->
+			<from-outcome>gererCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+
+
 	</navigation-rule>
-	
-	
+
+	<!-- /////////////////// MENU CLIENT ////////////////////////////////: -->
+
+	<navigation-rule>
+
+		<from-view-id>/menu-Client.xhtml</from-view-id>
+
+		<navigation-case>
+
+			<from-outcome>addClient</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajouter_client.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+
+			<from-outcome>listClient</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-Client.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+
+			<from-outcome>editClient</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/modifier_client.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>accueil</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>rechercherclient</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/rechercher_client.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+
+	<navigation-rule>
+
+		<from-view-id>/ajouter_client.xhtml</from-view-id>
+
+		<navigation-case>
+			<from-outcome>listClient</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-Client.xhtml</to-view-id>
+
+		</navigation-case>
+
+
+	</navigation-rule>
+	<navigation-rule>
+
+<from-view-id>/modifier_client.xhtml</from-view-id>
+
+<navigation-case>
+<from-outcome>listClient</from-outcome>
+<!-- page de destination -->
+<to-view-id>/menu-Client.xhtml</to-view-id>
+
+</navigation-case>
+
+
+</navigation-rule>
+
+
+<navigation-rule>
+<from-view-id>rechercher_client.xhtml</from-view-id>
+<navigation-case>
+<from-outcome>rechClient</from-outcome>
+
+<to-view-id>/rechercher_client.xhtml</to-view-id>
+</navigation-case>
+
+
+
+</navigation-rule>
+
+
 	<!-- /////////////////// MENU COMPTE ////////////////////////////////: -->
 	<navigation-rule>
 		<from-view-id>menu-comptes.xhtml</from-view-id>
 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>editCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/modifier-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<!-- 1.2. cas de navigation : menu-comptes.xhtml vers menu-comptes.xhtml (suppression) -->
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>listCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>depCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/depot-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>retCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/retrait-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>virCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/virement-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>ajoutCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/ajout-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuPrinc</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/accueil.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>attribCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/attribuer-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>cherCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/recherche-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>depotCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/depot-compte.xhtml</to-view-id>
- 		</navigation-case>
-	
-	
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>editCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/modifier-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<!-- 1.2. cas de navigation : menu-comptes.xhtml vers menu-comptes.xhtml 
+			(suppression) -->
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>listCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>depCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/depot-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>retCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/retrait-compte.xhtml</to-view-id>
+		</navigation-case>
+
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>ajoutCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajout-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuPrinc</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>attribCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/attribuer-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>cherCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/recherche-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>depotCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/depot-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>retCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/depot-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>virCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/virement-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>virementCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/virement-compte.xhtml</to-view-id>
+		</navigation-case>
+
 	</navigation-rule>
-	
+
 	<!-- /////////////////// AJOUT COMPTE ////////////////////////////////: -->
 	<navigation-rule>
 		<from-view-id>ajout-compte.xhtml</from-view-id>
-		
+
 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuPrinc</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/accueil.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>attribCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/attribuer-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>cherCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/recherche-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>listCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
-	
-	
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuPrinc</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>attribCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/attribuer-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>cherCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/recherche-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>listCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>virementCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/virement-compte.xhtml</to-view-id>
+		</navigation-case>
+
+
 	</navigation-rule>
-	
-	
+
+
 	<!-- /////////////////// MODIFIER COMPTE ////////////////////////////////: -->
 	<navigation-rule>
 		<from-view-id>modifier-compte.xhtml</from-view-id>
 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>listCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuPrinc</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/accueil.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>attribCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/attribuer-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>cherCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/recherche-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
-	
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>listCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuPrinc</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>attribCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/attribuer-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>cherCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/recherche-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>virementCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/virement-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>ajoutCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajout-compte.xhtml</to-view-id>
+		</navigation-case>
+
 	</navigation-rule>
-	
+
 	<!-- /////////////////// ATTRIBUER COMPTE ////////////////////////////////: -->
 	<navigation-rule>
 		<from-view-id>attribuer-compte.xhtml</from-view-id>
-		
-			<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>listCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuPrinc</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/accueil.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>attribCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/attribuer-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>cherCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/recherche-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
-	
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>listCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuPrinc</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>attribCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/attribuer-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>cherCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/recherche-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>virementCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/virement-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>ajoutCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajout-compte.xhtml</to-view-id>
+		</navigation-case>
+
 	</navigation-rule>
-	
+
 	<!-- /////////////////// DEPOT COMPTE ////////////////////////////////: -->
 	<navigation-rule>
 		<from-view-id>depot-compte.xhtml</from-view-id>
 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>listCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuPrinc</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/accueil.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>attribCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/attribuer-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>cherCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/recherche-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>listCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuPrinc</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>attribCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/attribuer-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>cherCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/recherche-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>virementCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/virement-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>ajoutCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajout-compte.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
-	
+
+
+
 	<!-- /////////////////// CHERCHER COMPTE ////////////////////////////////: -->
 	<navigation-rule>
 		<from-view-id>recherche-compte.xhtml</from-view-id>
-		
-			<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>listCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/compte-trouves.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuPrinc</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/accueil.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>attribCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/attribuer-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>cherCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/recherche-compte.xhtml</to-view-id>
- 		</navigation-case>
- 		
- 		<navigation-case>
- 				<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink dans menu-comptes)-->
- 				<from-outcome>menuCompte</from-outcome>
- 				<!-- page de destination -->
- 				<to-view-id>/menu-comptes.xhtml</to-view-id>
- 		</navigation-case>
-	
-	
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>ajoutCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajout-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>listCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/recherche-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuPrinc</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>attribCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/attribuer-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>cherchCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/recherche-compte.xhtml</to-view-id>
+		</navigation-case>
+
+
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>virementCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/virement-compte.xhtml</to-view-id>
+		</navigation-case>
+
+
+	</navigation-rule>
+
+
+	<!-- /////////////////// VIREMENT COMPTE ////////////////////////////////: -->
+
+	<navigation-rule>
+		<from-view-id>virement-compte.xhtml</from-view-id>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>ajoutCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajout-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>listCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuPrinc</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>attribCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/attribuer-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>cherCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/recherche-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>virementCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/virement-compte.xhtml</to-view-id>
+		</navigation-case>
+
+
+
+	</navigation-rule>
+
+	<!-- /////////////////// RETIRER COMPTE ////////////////////////////////: -->
+
+	<navigation-rule>
+		<from-view-id>retrait-compte.xhtml</from-view-id>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>listCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuPrinc</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>attribCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/attribuer-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>cherCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/recherche-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>menuCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/menu-comptes.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>virementCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/virement-compte.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom (valeur de l'attribut action de h:commandlink 
+				dans menu-comptes) -->
+			<from-outcome>ajoutCompte</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajout-compte.xhtml</to-view-id>
+		</navigation-case>
+
+
+
 	</navigation-rule>
 </faces-config>

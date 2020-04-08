@@ -13,6 +13,10 @@ import com.intiformation.gestion.model.Compte;
 
 public class CompteDaoImpl implements ICompteDAO {
 	
+	double montant;
+	
+
+
 	@Override
 	public List<Compte> getCompteByIdConseiller(double idConseiller) {
 		PreparedStatement ps = null;
@@ -42,6 +46,8 @@ public class CompteDaoImpl implements ICompteDAO {
 				
 			}//end while
 			return listeCompte;
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -294,6 +300,7 @@ PreparedStatement ps = null;
 		PreparedStatement ps = null;
 		double solde = compte.getSolde();
 		int id_compte = compte.getIdCompte();
+		montant = compte.getMontant();
 		
 		try {
 			String requeteSqlAdd= "UPDATE comptes SET solde=? WHERE id_compte= ? ";
@@ -445,6 +452,7 @@ PreparedStatement ps = null;
 		PreparedStatement ps = null;
 		double solde = compte.getSolde();
 		int id_compte = compte.getIdCompte();
+		montant = compte.getMontant();
 
 		if(montant<(solde)) {
 		
@@ -481,15 +489,21 @@ PreparedStatement ps = null;
 
 	@Override
 	public boolean transfert(Compte compteDonneur, Compte compteReceveur, double montant) {
+		Compte compteDonn = getCompteByID(compteDonneur.getIdCompte());
+		Compte compteRec = getCompteByID(compteDonneur.getIdCompteRec());
+		
+		
+	
 PreparedStatement ps = null;
 		
-		double soldeReceveur = compteReceveur.getSolde();
-		int id_compteReceveur = compteReceveur.getIdCompte();
+		double soldeReceveur = compteRec.getSolde(); //getSolde
+		int id_compteReceveur = compteRec.getIdCompte(); //getIdCompte
+		//Compte compte = new Compte();
 		
 		
-		double soldeDonneur = compteDonneur.getSolde();
-		int id_compteDonneur = compteDonneur.getIdCompte();
-		double decouvertDonner = compteDonneur.getDecouvert();
+		double soldeDonneur = compteDonn.getSolde();
+		int id_compteDonneur = compteDonn.getIdCompte();
+		double decouvertDonner = compteDonn.getDecouvert();
 		
 		if(montant<(soldeDonneur+decouvertDonner)) {
 		
@@ -497,8 +511,9 @@ PreparedStatement ps = null;
 			String requeteSqlRemove= "UPDATE comptes SET solde=? WHERE id_compte= ? ";
 			
 			ps = this.connection.prepareStatement(requeteSqlRemove);
-
-			ps.setDouble(1, soldeDonneur-montant);
+			double resultat = soldeDonneur-montant;
+			System.out.println(resultat);
+			ps.setDouble(1, resultat);
 			ps.setInt(2, id_compteDonneur);
 
 			int verifTransfertDonneur = ps.executeUpdate();
@@ -506,11 +521,17 @@ PreparedStatement ps = null;
 			String requeteSqlAdd= "UPDATE comptes SET solde=? WHERE id_compte= ? ";
 			
 			ps = this.connection.prepareStatement(requeteSqlAdd);
-
-			ps.setDouble(1, soldeReceveur+montant);
+			
+			resultat = soldeReceveur+montant;
+			System.out.println(resultat);
+			ps.setDouble(1, resultat);
+			
 			ps.setInt(2, id_compteReceveur);
+			
 
 			int verifTransfertReceveur = ps.executeUpdate();
+			System.out.println(soldeDonneur);
+			System.out.println(soldeReceveur);
 
 			return (verifTransfertDonneur+verifTransfertReceveur==2);
 			
@@ -532,8 +553,19 @@ PreparedStatement ps = null;
 		return false;
 
 	}
-	
-	
 
+	
+	
+	
+	/*==============================getters/setters=============================*/
+	
+	public double getMontant() {
+		return montant;
+	}
+
+	public void setMontant(double montant) {
+		this.montant = montant;
+	}
+	
 	
 }
